@@ -1,4 +1,5 @@
-import fetch from 'isomorphic-fetch';
+import * as types from '../constants/action_types';
 
-export function search() {
+export function addComment(text) {
+  return { type: types.ADD_COMMENT, text };
 }

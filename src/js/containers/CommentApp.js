@@ -20,18 +20,11 @@ App.propTypes = {
 }
 
 function stateToProps(state) {
-  const { comments } = state;
-  const {
-    isRequesting,
-    items
-  } = comments || {
-    false,
-    []
-  };
+  const { isRequesting, comments } = state;
   return {
-    isRequesting,
-    items
+    isRequesting: isRequesting,
+    comments: comments
   }
 }
 
-export default connect()(CommentApp);
+export default connect(stateToProps)(CommentApp);

@@ -8,10 +8,10 @@ export const Config = {
   output: {
     filename: "[name].js"
   },
-  //resolve: {
-  //  modulesDirectories: ["node_modules"],
-  //  extensions: ["", "js"]
-  //},
+  resolve: {
+    modulesDirectories: ["node_modules"],
+    extensions: ["", ".js"]
+  },
   module: {
     loaders: [
       {

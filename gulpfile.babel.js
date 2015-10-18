@@ -8,3 +8,13 @@ gulp.task("compile", () => {
     .pipe(webpack(Config))
     .pipe(gulp.dest(path.join(__dirname, "assets", "js")));
 });
+
+gulp.task("watch", () => {
+  gulp.watch(
+    [
+      path.join(__dirname, "src", "js", "*.js"),
+      path.join(__dirname, "src", "js", "**", "*.js")
+    ],
+    ["compile"]
+  );
+});

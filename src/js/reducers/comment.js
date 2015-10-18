@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { ADD_COMMENT, REQUEST_COMMENT, RECEIVE_COMMENT } from "../constants/ActionTypes";
 
 function comments(state = {isRequesting: false, comments: []}, action) {
+  console.log("reducers:comments");
   switch (action.type) {
   case ADD_COMMENT:
     return Object.assign(

@@ -20,5 +20,10 @@ export const Config = {
         loader: "babel-loader"
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ],
+  progress: true
 };

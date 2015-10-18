@@ -2,8 +2,9 @@
 
 import json
 import threading
+import os
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, Response
 
 app = Flask(__name__)
 
@@ -28,8 +29,8 @@ def comments():
     global _COMMENTS
     latest_id = 0
     if request.method == "POST":
-        body = json.loads(request.body)
-        add_comment(body["comment"])
+        body = json.loads(request.data)
+        add_comment(str(body["comment"]))
 
     comments = [
         comment
@@ -41,7 +42,17 @@ def comments():
     })
 
 
+@app.route("/assets/<path:path>")
+def assets(path):
+    mimetypes = {
+        "css": "text/css",
+        "js": "application/javascript",
+    }
+    mimetype = mimetypes[os.path.dirname(path)]
 
+    return Response(
+        open(os.path.join(os.path.dirname(__file__), "assets", path)).read(),
+        mimetype=mimetype)
 
 if __name__ == "__main__":
     app.run(debug=True)

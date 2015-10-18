@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
+import Comment from "./comment";
 
 export default class Comments extends Component {
   render() {
+    console.log("Comments.render");
     return (
       <ul>
         {this.props.comments.map((comment, index) =>
-          <Comment {...comment} key={index} />
+          <Comment text={comment} key={index} />
         )}
       </ul>
     );
@@ -13,6 +15,5 @@ export default class Comments extends Component {
 }
 
 Comments.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.shape({
-  }).isRequired).isRequired
+  comments: PropTypes.array.isRequired
 };

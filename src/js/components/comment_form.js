@@ -1,9 +1,11 @@
-import React, { findDOMNode, Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import ReactDOM from "react-dom";
 
 export default class CommentForm extends Component {
-  handleClick() {
-    const node = findDOMNode(this.refs.input);
+  handleClick(e) {
+    const node = ReactDOM.findDOMNode(this.refs.input);
     const text = node.value.trim();
+    console.log("CommentForm.handleClick=" + text);
     this.props.onCommentClick(text);
     node.value = '';
   }

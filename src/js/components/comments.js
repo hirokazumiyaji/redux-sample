@@ -7,7 +7,7 @@ export default class Comments extends Component {
     return (
       <ul>
         {this.props.comments.map((comment, index) =>
-          <Comment text={comment} key={index} />
+          <Comment text={comment.text} key={index} />
         )}
       </ul>
     );

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1ce92da1e8ab94ba1226"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "05a2d708431cf0904426"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -26414,7 +26414,7 @@
 	        "ul",
 	        null,
 	        this.props.comments.map(function (comment, index) {
-	          return _react2["default"].createElement(_comment2["default"], { text: comment, key: index });
+	          return _react2["default"].createElement(_comment2["default"], { text: comment.text, key: index });
 	        })
 	      );
 	    }
@@ -26589,7 +26589,7 @@
 	function addComment(comment) {
 	  return {
 	    type: types.ADD_COMMENT,
-	    comment: comment
+	    comment: { id: 0, text: comment }
 	  };
 	}
 
@@ -26614,7 +26614,10 @@
 	    dispatch(request());
 	    return (0, _isomorphicFetch2["default"])("/comments", {
 	      method: "POST",
-	      body: JSON.stringify({ comment: comment })
+	      body: JSON.stringify({ comment: comment }),
+	      headers: {
+	        "Content-Type": "application/json; charset=UTF-8"
+	      }
 	    }).then(function (response) {
 	      return response.json();
 	    }).then(function (json) {

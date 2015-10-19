@@ -4,7 +4,7 @@ import * as types from "../constants/ActionTypes";
 export function addComment(comment) {
   return {
     type: types.ADD_COMMENT,
-    comment: comment
+    comment: {id: 0, text: comment}
   };
 }
 
@@ -31,7 +31,10 @@ export function postComment(comment) {
       "/comments",
       {
         method: "POST",
-        body: JSON.stringify({comment: comment})
+        body: JSON.stringify({comment: comment}),
+        headers: {
+          "Content-Type": "application/json; charset=UTF-8"
+        }
       })
       .then(response => {
         return response.json();

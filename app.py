@@ -13,10 +13,12 @@ _COMMENTS = []
 
 
 def add_comment(comment):
+    global _COMMENTS
     with _LOCK:
         comment["id"] = len(_COMMENTS) + 1
         _COMMENTS.append(comment)
-        _COMMENTS = sorted(_COMMENTS, lambda x: x["id"])
+        _COMMENTS = sorted(_COMMENTS, key=lambda x: x["id"])
+    return comment["id"]
 
 
 @app.route("/", methods=["GET"])
@@ -29,13 +31,15 @@ def comments():
     global _COMMENTS
     latest_id = 0
     if request.method == "POST":
-        body = json.loads(request.data)
-        add_comment(str(body["comment"]))
+        body = json.loads(request.data.decode("utf-8"))
+        add_comment({
+            "text": body["comment"]
+        })
 
     comments = [
         comment
         for comment in _COMMENTS
-        if comment["id"] > body["latest_id"]
+        if not body.get("latest_id") or comment["id"] > latest_id
     ]
     return jsonify({
         "comments": comments,
